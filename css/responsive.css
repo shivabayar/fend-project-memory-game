@@ -1,0 +1,14 @@
+/* responsive styles */
+
+@media screen and (min-width: 910px) {
+
+}
+
+@media screen and (min-width: 691px) and (max-width: 909px) {
+}
+
+@media screen and (max-width: 690px) {
+    .deck {
+        width: 100% !important;
+    }
+}

@@ -38,7 +38,7 @@ h1 {
  */
 
 .deck {
-    width: 660px;
+    width: 50%;
     min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
@@ -67,8 +67,12 @@ h1 {
     transform-style: preserve-3d;
 }
 
+.card {
+    transform: rotateY(180deg);
+}
+
 .deck .card.open {
-    transform: rotateY(-180deg);
+    transform: rotateY(360deg);
     background: #02b3e4;
     cursor: default;
 }
