@@ -1,12 +1,13 @@
 /*
- * Create a list that holds all of your cards
+ * List that holds all of cards
  */
 const deckArray = ['fab fa-github', 'fab fa-android', 'fab fa-amazon', 'fab fa-google',
                     'fab fa-facebook-f', 'fab fa-twitter', 'fab fa-instagram', 'fab fa-apple',
                     'fab fa-github', 'fab fa-android', 'fab fa-amazon', 'fab fa-google',
                     'fab fa-facebook-f', 'fab fa-twitter', 'fab fa-instagram', 'fab fa-apple'];
 
-const deckShuffledArray = split(shuffle(deckArray), 4);
+const temp = shuffle(deckArray);
+const deckShuffledArray = split(temp, 4);
 const deckSelector = document.querySelector('.deck');
 const counterElement = document.querySelector('.moves');
 const celebration = document.getElementById('confeti');
@@ -99,7 +100,7 @@ function giveStarRatings(score) {
  */
 deckSelector.addEventListener('click', function(events) {
     if(events && events.target && events.target.tagName.toLowerCase() === 'div') {
-        if(deckQueue.length == 2)
+        if(deckQueue.length === 2)
             return;
 
         deckQueue.push(events.target);
@@ -130,7 +131,7 @@ deckSelector.addEventListener('click', function(events) {
                     celebration.style.display = 'none';
                 }, 5000);
             }
-        } else if(clickCounter % 2 === 0
+        } else if(clickCounter % 2 === 0 //close the cards if they didn't match
             && events.target.firstElementChild.className !==  deckQueue[0].firstElementChild.className) {
             ++failCounter;
             setTimeout(function(){ 
@@ -147,3 +148,4 @@ deckSelector.addEventListener('click', function(events) {
 document.querySelector('.restart').addEventListener('click', function() {
     location.reload();
 });
+
