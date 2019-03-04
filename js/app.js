@@ -153,9 +153,13 @@ deckSelector.addEventListener('click', function(events) {
     }
 });
 
-document.querySelector('#restart').addEventListener('click', function() {
+const restartElements = document.getElementsByClassName('restart');
+
+function reloadPage() {
     location.reload();
-});
+}
+for(restartElement of restartElements)
+    restartElement.addEventListener('click', reloadPage, false);
 
 let h1 = document.getElementById('display'),
     seconds = 0, minutes = 0, hours = 0,
