@@ -92,8 +92,8 @@ function buildDeck(deckArray) {
 function giveStarRatings(score) {
     const stars = document.querySelector('.stars');
 
-    for(let i = 0; i < score; ++i)
-        stars.children[i].firstElementChild.className = 'fa fa-star';
+    for(let i = stars.children.length-1; i > 0 && i >= score ; --i)
+        stars.children[i].firstElementChild.className = 'far fa-star';
 }
 /*
  * 
@@ -149,6 +149,11 @@ deckSelector.addEventListener('click', function(events) {
                 deckQueue[0].classList.remove('show');
                 deckQueue = [];
             }, 1000);
+        }
+        
+        if(clickCounter % 16 === 0) {
+            const score = Math.ceil(5*((clickCounter - failCounter)/clickCounter));
+            giveStarRatings(score);
         }
     }
 });
