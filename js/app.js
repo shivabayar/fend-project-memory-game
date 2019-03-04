@@ -100,8 +100,11 @@ function giveStarRatings(score) {
  */
 deckSelector.addEventListener('click', function(events) {
     if(events && events.target && events.target.tagName.toLowerCase() === 'div') {
-        if(deckQueue.length === 2)
+        if(deckQueue.length === 2 || events.target.classList.contains('open'))
             return;
+
+        if(clickCounter === 0)
+            timer();
 
         deckQueue.push(events.target);
         ++clickCounter;
@@ -125,8 +128,12 @@ deckSelector.addEventListener('click', function(events) {
             //winning logic
             if(matchCounter * 2 === deckShuffledArray.length * deckShuffledArray[0].length) {
                 celebration.style.display = 'block';
+                stop();
                 const score = Math.ceil(5*((clickCounter - failCounter)/clickCounter));
                 giveStarRatings(score);
+                $('#winning-modal').modal('show');
+                $('.modal-body')[0].innerText = "Congratulations!! You finished the challenge in " + h1.textContent
+                        + " with " + clickCounter + " steps..";
                 setTimeout(function(){
                     celebration.style.display = 'none';
                 }, 5000);
@@ -145,7 +152,43 @@ deckSelector.addEventListener('click', function(events) {
     }
 });
 
-document.querySelector('.restart').addEventListener('click', function() {
+document.querySelector('#restart').addEventListener('click', function() {
     location.reload();
 });
 
+let h1 = document.getElementById('display'),
+    seconds = 0, minutes = 0, hours = 0,
+    t;
+
+
+function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+            minutes = 0;
+            hours++;
+        }
+    }
+
+    h1.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00")
+                    + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00")
+                    + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+    timer();
+}
+function timer() {
+    t = setTimeout(add, 1000);
+}
+
+/* Stop button */
+function stop() {
+    clearTimeout(t);
+}
+
+/* Clear button */
+function clear() {
+    h1.textContent = "00:00:00";
+    seconds = 0; minutes = 0; hours = 0;
+}
