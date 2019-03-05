@@ -90,10 +90,12 @@ function buildDeck(deckArray) {
 
 //paint the stars
 function giveStarRatings(score) {
-    const stars = document.querySelector('.stars');
+    const stars = document.querySelectorAll('.stars');
 
-    for(let i = stars.children.length-1; i > 0 && i >= score ; --i)
-        stars.children[i].firstElementChild.className = 'far fa-star';
+    for(star of stars) {
+        for(let i = star.children.length-1; i > 0 && i >= score ; --i)
+            star.children[i].firstElementChild.className = 'far fa-star';
+    }
 }
 /*
  * 
